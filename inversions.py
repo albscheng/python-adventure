@@ -3,7 +3,7 @@
 def compute_inversions(inputArray):
     input_size = len(inputArray)
 
-    if input_size < 1:
+    if input_size <= 1:
         return {'array': inputArray, 'inversions': 0}
 
 
@@ -34,11 +34,9 @@ def merge_and_compute_inversions(leftArray, rightArray):
         if leftArray[left_index] <= rightArray[right_index]:
             sorted_array.append(leftArray[left_index])
             left_index += 1
-            print 'left: %i' % left_index
         else:
             sorted_array.append(rightArray[right_index])
             right_index += 1
-            print 'right: %i' % right_index
             inversion_count += len(leftArray) - left_index
 
     if left_index == len(leftArray):
@@ -48,9 +46,12 @@ def merge_and_compute_inversions(leftArray, rightArray):
 
     return {'array': sorted_array, 'inversions': inversion_count}
 
-inputArray = [1, 2, 3, 4, 5, 6]
-right = []
-left = [1, 2, 2]
-test = compute_inversions([1])
-temp = merge_and_compute_inversions(left, right)
-print test
+if __name__ == "__main__":
+
+    debug_array = [8,7,6,5,4,3,2,1,2,3,4,5,6]
+    with open('IntegerArray2.txt', 'r') as f:
+        input_array = [];
+        for line in f.readlines():
+            input_array.append(int(line))
+
+    print compute_inversions(input_array)['inversions']
