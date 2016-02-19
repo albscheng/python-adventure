@@ -18,15 +18,15 @@ scores = [0] * num_words                # Creates list of 0s, size num_words
 
 while num_words - num_learned > 0:
     clear()
-    selection  = random.choice(vocab)
+    selection = random.choice(vocab)
     selection_index = vocab.index(selection)
+    score_index = vocab_copy.index(selection)
     word, definition = selection
     definition = definition.strip('"')  # Gets rid of " "
 
     print(word, "\n\n%d/%d" % (num_learned, num_words))
     response = input()
     if response == "q":
-        #quit()
         break
     clear()
 
@@ -34,13 +34,12 @@ while num_words - num_learned > 0:
     print("\n%d/%d" % (num_learned, num_words))
     response = input()
     if response == "q":
-        #quit()
         break
     elif response == "y" or response == "'":
         num_learned += 1
         vocab = vocab[:selection_index] + vocab[selection_index + 1:]
     else:
-        scores[selection_index] += 1
+        scores[score_index] += 1
 
 clear()
 print("Your worst %d words are:" % (NUM_WORST))
